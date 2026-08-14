@@ -1,0 +1,18 @@
+[package]
+name = "asset-pipeline"
+edition = "2024"
+version.workspace = true
+default-run = "asset-pipeline"
+
+[dependencies]
+anyhow = { workspace = true }
+aseprite-io = { workspace = true, features = ["tiny-skia"] }
+clap = { workspace = true, features = ["derive"] }
+ctrlc = { workspace = true }
+dirs = { workspace = true }
+image = { workspace = true }
+notify = { workspace = true }
+rayon = { workspace = true }
+resvg = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
