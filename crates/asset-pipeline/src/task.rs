@@ -44,11 +44,11 @@ impl Task {
         let newest_input = input_times
             .into_iter()
             .max()
-            .unwrap_or_else(|| SystemTime::now());
+            .unwrap_or_else(SystemTime::now);
         let oldest_output = output_times
             .into_iter()
             .min()
-            .unwrap_or_else(|| SystemTime::UNIX_EPOCH);
+            .unwrap_or(SystemTime::UNIX_EPOCH);
 
         if newest_input > oldest_output {
             (self.action)(&self.inputs, &self.outputs)?;
@@ -97,7 +97,7 @@ impl TaskStore {
         for input in inputs {
             self.tasks
                 .entry(input)
-                .or_insert_with(|| Vec::new())
+                .or_insert_with(Vec::new)
                 .push(task.clone());
         }
 

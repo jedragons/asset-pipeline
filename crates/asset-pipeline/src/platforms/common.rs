@@ -69,7 +69,7 @@ fn atlas_task(inputs: &[PathBuf], outputs: &[PathBuf]) -> anyhow::Result<()> {
 
     atlas
         .save(json, png)
-        .with_context(|| format!("Saving atlas"))?;
+        .with_context(|| "Saving atlas".to_string())?;
 
     println!("TASK: generated atlas image {png:?}",);
     println!("TASK: generated atlas metadata {json:?}",);
