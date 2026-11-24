@@ -8,8 +8,10 @@ use std::{
 use anyhow::Context as _;
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
 
+type Action = Arc<dyn Fn(&[PathBuf], &[PathBuf]) -> anyhow::Result<()> + Send + Sync>;
+
 pub struct Task {
-    pub action: Arc<dyn Fn(&[PathBuf], &[PathBuf]) -> anyhow::Result<()> + Send + Sync>,
+    pub action: Action,
     pub inputs: Vec<PathBuf>,
     pub outputs: Vec<PathBuf>,
 }
@@ -95,10 +97,7 @@ impl TaskStore {
         let task = Arc::new(Task::new(action, inputs.clone(), outputs));
 
         for input in inputs {
-            self.tasks
-                .entry(input)
-                .or_insert_with(Vec::new)
-                .push(task.clone());
+            self.tasks.entry(input).or_default().push(task.clone());
         }
 
         Ok(())
