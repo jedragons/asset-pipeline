@@ -39,7 +39,7 @@ fn xml_values_task(_inputs: &[PathBuf], outputs: &[PathBuf]) -> anyhow::Result<(
 
     for output in outputs {
         if let Some(values_dir) = output.parent() {
-            fs::create_dir_all(&values_dir)
+            fs::create_dir_all(values_dir)
                 .with_context(|| format!("Creating directory `{values_dir:?}`"))?;
         }
 

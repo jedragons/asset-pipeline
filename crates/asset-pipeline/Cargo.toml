@@ -10,7 +10,6 @@ aseprite-io = { workspace = true, features = ["tiny-skia"] }
 clap = { workspace = true, features = ["derive"] }
 ctrlc = { workspace = true }
 dirs = { workspace = true }
-image = { workspace = true }
 notify = { workspace = true }
 rayon = { workspace = true }
 resvg = { workspace = true }

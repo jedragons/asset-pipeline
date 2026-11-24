@@ -76,9 +76,9 @@ impl Atlas {
             .save_png(png_path)
             .with_context(|| format!("Saving atlas PNG to {png_path:?}"))?;
 
-        let json =
-            serde_json::to_string(&self.meta).with_context(|| format!("Serializing atlas JSON"))?;
-        fs::write(&json_path, json)
+        let json = serde_json::to_string(&self.meta)
+            .with_context(|| "Serializing atlas JSON".to_string())?;
+        fs::write(json_path, json)
             .with_context(|| format!("Saving atlas JSON to {json_path:?}"))?;
 
         Ok(())
@@ -100,7 +100,7 @@ fn read_sprites(
 
         let file_name = path.file_stem().unwrap_or_default().to_string_lossy();
 
-        let file = fs::File::open(&path).with_context(|| format!("Could not open `{path:?}`"))?;
+        let file = fs::File::open(path).with_context(|| format!("Could not open `{path:?}`"))?;
 
         let ase = AsepriteFile::from_reader(file)
             .with_context(|| format!("`{path:?} is not valid aseprite file"))?;
